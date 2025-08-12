@@ -74,7 +74,8 @@ main();
 #### You can add pipes before and after each pipe implementation
 
 ```ts
-import { attachPipes, PipeItem, Pipeline } from "./pipeline/pipeline";
+import { attachPipes } from "./decorators/attachPipes";
+import { PipeItem, Pipeline } from "./pipeline/pipeline";
 
 class LogParams implements PipeItem<number[], number[]> {
     run(...args: number[]): number[] {

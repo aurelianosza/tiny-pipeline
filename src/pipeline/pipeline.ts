@@ -1,30 +1,9 @@
 import { castArray } from 'lodash'
 import 'reflect-metadata';
-
-const ATTACHED_PIPES = Symbol("attached_pipes");
-
-type PipeItemConstructor = new (...args: any[]) => PipeItem<any, any>;
-
-interface AttachPipesOptions {
-    before?: PipeItem[]|PipeItemConstructor[];
-    after?: PipeItem[]|PipeItemConstructor[];
-}
-
-export type PipeItemAttachable = PipeItem<any, any>|PipeItemConstructor;
+import { PipeItemAttachable, getAttachedPipes, PipeItemConstructor } from '../decorators/attachPipes';
 
 function isPipeItem(obj: any): obj is PipeItem<any, any> {
     return obj && typeof obj.run === 'function';
-}
-
-export function attachPipes(options: AttachPipesOptions) {
-    return function <T extends PipeItem|PipeItemConstructor>(target: T) {
-        Reflect.defineMetadata(ATTACHED_PIPES, options, target);
-        return target;
-    };
-}
-
-export function getAttachedPipes(pipe: PipeItem|Function): AttachPipesOptions {
-    return Reflect.getMetadata(ATTACHED_PIPES, pipe) || {};
 }
 
 export interface PipeItem<Args extends any[] = any[], ReturnType = any>{
