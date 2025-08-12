@@ -137,7 +137,7 @@ The envisioned listener API will allow you to do something like:
 
 ```ts
 
-import { attachPipes, PipeItem, Pipeline } from "./pipeline/pipeline";
+import { PipeItem, Pipeline } from "./pipeline/pipeline";
 
 class Duplicate implements PipeItem<[number, number], number> {
     run(a: number, b: number): number {
@@ -168,7 +168,7 @@ class Division implements PipeItem<[number, number], number> {
                 dividing : a,
                 divisor : b
             });
-            // after this, in pipeline, square don`t be called
+            // after this, in pipeline, square won`t be called
             // Will be continue the run in .on("Division::division_by_zero", callback) lines
         }
         const result = a / b;
